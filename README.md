@@ -119,3 +119,7 @@ MUDIS also presents two features that help us the reaerchers to automatre our wo
 
 
 ## Screens examples ##
+
+| <img src="/images/addMUD.PNG" width="80%" height="450"> | 
+|:--:| 
+| *Add a new MUD screen - gives users the ability to add new generated MUDs into the system for further investigation* |
