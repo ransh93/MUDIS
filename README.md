@@ -9,17 +9,17 @@ MUDIS tool introduces comparison and generalization features, allowing users to 
 Motivated by the impact of location on the MUD, we built
 this tool, which as few fundamental features:
 
-<details><summary><b>ADD A NEW MUD<b></summary>
+<details><summary><b>ADD A NEW MUD</b></summary>
 <p>
 
-This is a basic feature that gives researchers the opption to add MUDS into the system.<br>
-The uploaded MUD is them saved at the server and in a dedicated MongoDB for further use.<br>
-When adding a new MUD you can add some helpful metadata like - device name, device type, the device geo location etc.
+This is a basic feature that gives researchers the option to add MUDS into the system.<br>
+The uploaded MUD is then saved at the server and in a dedicated MongoDB for further use.<br>
+When adding a new MUD you can add some helpful metadata like - device name, device type, the device geolocation etc.
 
 </p>
 </details>
   
-<details><summary><b>MUD parser<b></summary>
+<details><summary><b>MUD PARSER</b></summary>
 <p>
 
 The basic concept of MUDIS is its parsing engine which gives MUDIS its power.<br>
@@ -30,7 +30,7 @@ This objects above creates a MUD object that MUDIS will use in the more complex 
 </p>
 </details>
   
-<details><summary><b>COMPARE MUDS<b></summary>
+<details><summary><b>COMPARE MUDS</b></summary>
 <p>
 
 Once you done uploading two or more MUDs you can start using one of the main feature of MUDIS, the comparison feature.<br>
@@ -48,22 +48,69 @@ files and highlight similar entries. This allows us to drill down and gain insig
   
 </p>
 </details>
+  
+<details><summary><b>GENERALIZE MUDS</b></summary>
+<p>
 
-#### Add a new MUD
-This is a basic feature that gives researchers the opption to add MUDS into the system.<br>
-The uploaded MUD is them saved at the server and in a dedicated MongoDB for further use.<br>
-When adding a new MUD you can add some helpful metadata like - device name, device type, the device geo location etc.
+This feature aims to create a one comprehensive, generalized MUD  that can serve as a white-list for the network behavior of bothMUDs (represent two locations in our experiments).<br>
+The generalization process is done by using the comparison feature that "learns" are are the MUDs differences and what can be generalized by MUDIS. <br>
+The generalized MUD is then presented and inserted into MUDIS DataBase for future research and use of the given user.
+  
+</p>
+</details>
+  
+<details><summary><b>BONUS FEATURES</b></summary>
+<p>
 
-#### Add a new MUD
+MUDIS also presents two features that help us the reaerchers to automatre our work and to get our results right:
+* ACEs filter - this gives the user to filter out ACEs that are created and influenced by the network and not by the device (therefore, harming the results).
+* List comparison - this allows the users to compare a list of tuples where each tuple is two MUDs we want to compare. this comparison returns all similarity score for further use like creating graphs, detecting anomalies and so on.
+  
+</p>
+</details>
 
 
-which gets two MUDs as input and performs
-two tasks:
+## Installations guide ##
 
-* MUD Comparison - calculates the MUD similarity measure. It then examines the differences between two MUD
-files and highlights similar entries. This allows us to drill
-down and gain insights about the origin of the differences.
-* MUD Generalization - creates a generalized MUD that
-can serve as a white-list for the network behavior of both
-MUDs (represent two locations in our experiments), this
-is done by covering both input MUDs.
+### Overview
+
+MUDIS is a web application tool based on a **Flask server** (python code) and **MongoDB** (saves MUDS for your future use). <br>
+Inorder to help researchers out there I have created a detailed setup and installation guide that can be find here. <br>
+This guide will show you how to setup MUDIS in a quick and easy way by using **Docker compose** that will “setu&install” your entire environment in a few simple steps.<br>
+All the needed files are in this repository under MUDIS setup folder for our users use!
+
+### Prerequisite
+
+Make sure you have already installed both Docker Engine and Docker Compose. You don’t need to install Python or MongoDB, as both are provided by Docker images.
+
+#### Some recommendations:
+- I recommend doing it on a Linux server (I used a VM with UBUNTU) but you can also run docker on your Windows or Mac
+- You need to install **Docker Engine and Docker Compose** at that order. Go over this to manuals and read them carefully, if you will do it line by line you will see it work like a charm
+  - Docker Engine - https://docs.docker.com/engine/install/ubuntu/
+  - Docker Compose - https://docs.docker.com/compose/install/
+
+### Step 1: Setup
+- Create a directory for the project:
+```bash
+$ mkdir MUDIS
+$ cd MUDIS
+```
+- Inside your project folder, add the files presneted in this git:
+  - **All MUDIS** code with the main application file called app.py.
+  - **Docker-compose.yml** which tells the docker compose the environment it needs to install and run.
+  - **DockerFile** that uploads the code into the docker container, installs all the application requirements and Runs MUDIS application.
+  - **requirements.txt** that holds all MUDIS requirements and needs to be installed before MUDIS can run.
+
+So, the result of your MUDIS project folder should look like this:
+#### insert image here
+
+### Step 2: Build and run your app with Compose
+- From your project directory, start up your application by running `docker-compose up`
+- Enter http://localhost:5000/ in a browser to see the application running
+
+### Step 3: Start adding MUDs into the system and compare them using MUDIS
+
+That is all! You can run MUDIS in only three simple steps and get all the benefit out of it
+
+## Screens examples ##
+
