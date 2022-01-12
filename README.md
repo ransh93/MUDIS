@@ -3,7 +3,10 @@
 ### What is MUDIS and why should you use it?
 
 MUDIS - MUD Inspection System is a tool that compares the network behavior of IOT devices, based on their formal description in the MUD file
-MUDIS tool introduces comparison and generalization features, allowing users to investigate MUD files differences.
+MUDIS tool introduces comparison and generalization features, allowing users to investigate MUD files differences.<br><br>
+This tool and all algorithems within are explained and developed to promote the our paper that was accepted to **The 18th IEEE/IFIP Network Operations and Management Symposium (NOMS 2022)**
+
+Add the paper here!
 
 
 ## Installation guide ##
