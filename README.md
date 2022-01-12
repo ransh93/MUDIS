@@ -123,3 +123,7 @@ MUDIS also presents two features that help us the reaerchers to automatre our wo
 | <img src="/images/addMUD.PNG" width="80%" height="450"> | 
 |:--:| 
 | *Add a new MUD screen - gives users the ability to add new generated MUDs into the system for further investigation* |
+
+| <img src="/images/homepage.PNG" width="80%" height="450"> | 
+|:--:| 
+| *MUDIS main screen - gives users the ability to choose two MUDs and to compare, generalize and filter ACEs using the system* |
