@@ -140,6 +140,6 @@ MUDIS also presents two features that help us the reaerchers to automatre our wo
 |:--:| 
 | *MUDIS main screen - shows the two MUDs clustered ACEs* |
 
-| <img src="/images/dissimilar.PNG" width="80%" height="450"> | 
+| <img src="/images/dissimilar .PNG" width="80%" height="450"> | 
 |:--:| 
 | *MUDIS main screen - shows the two MUDs dissimilar ACEs* |
