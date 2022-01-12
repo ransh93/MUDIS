@@ -70,7 +70,7 @@ MUDIS also presents two features that help us the reaerchers to automatre our wo
 </details>
 
 
-## Installations guide ##
+## Installation guide ##
 
 ### Overview
 
@@ -102,7 +102,8 @@ $ cd MUDIS
   - **requirements.txt** that holds all MUDIS requirements and needs to be installed before MUDIS can run.
 
 So, the result of your MUDIS project folder should look like this:
-#### insert image here
+
+<img src="/images/dirlist.png" width="50%" height="300">
 
 ### Step 2: Build and run your app with Compose
 - From your project directory, start up your application by running `docker-compose up`
