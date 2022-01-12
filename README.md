@@ -120,26 +120,59 @@ MUDIS also presents two features that help us the reaerchers to automatre our wo
 
 ## Screens examples ##
 
-| <img src="/images/addMUD.PNG" width="80%" height="450"> | 
-|:--:| 
-| *Add a new MUD screen - gives users the ability to add new generated MUDs into the system for further investigation* |
+We have added some screen examples for you to get the look and feel of MUDIS. <br>
+We really encourage you to install it and try it by yourself.
 
-| <img src="/images/homepage.PNG" width="80%" height="450"> | 
-|:--:| 
-| *MUDIS main screen - gives users the ability to choose two MUDs and to compare, generalize and filter ACEs using the system* |
+<details><summary><b>ADD MUD SCREEN</b></summary>
+<p>
+<img src="/images/addMUD.PNG" width="80%" height="450">
 
-| <img src="/images/similarity_score_and_identical.PNG" width="80%" height="450"> | 
-|:--:| 
-| *MUDIS compare screen - shows the two MUDs similarity score and the identical ACEs between them* |
+*Add a new MUD screen - gives users the ability to add new generated MUDs into the system for further investigation*
+ 
+</p>
+</details>
 
-| <img src="/images/domain_based_similarity.PNG" width="80%" height="450"> | 
-|:--:| 
-| *MUDIS compare screen - shows the two MUDs domain based similarity ACEs* |
+<details><summary><b>HOME PAGE SCREEN</b></summary>
+<p>
+<img src="/images/homepage.PNG" width="80%" height="450">
 
-| <img src="/images/clustered.PNG" width="80%" height="450"> | 
-|:--:| 
-| *MUDIS main screen - shows the two MUDs clustered ACEs* |
+*MUDIS main screen - gives users the ability to choose two MUDs and to compare, generalize and filter ACEs using the system*
+ 
+</p>
+</details>
 
-| <img src="/images/dissimilar .PNG" width="80%" height="450"> | 
-|:--:| 
-| *MUDIS main screen - shows the two MUDs dissimilar ACEs* |
+<details><summary><b>SIMILARITY SCORE AND IDENTICAL ACEs</b></summary>
+<p>
+<img src="/images/similarity_score_and_identical.PNG" width="80%" height="450">
+
+*MUDIS compare screen - shows the two MUDs similarity score and the identical ACEs between them*
+ 
+</p>
+</details>
+
+<details><summary><b>DOMAIN BASED SIMILARITY ACEs</b></summary>
+<p>
+<img src="/images/domain_based_similarity.PNG" width="80%" height="450">
+
+*MUDIS compare screen - shows the two MUDs domain based similarity ACEs*
+ 
+</p>
+</details>
+
+<details><summary><b>CLUSTERED ACEs</b></summary>
+<p>
+<img src="/images/clustered.PNG" width="80%" height="450">
+
+*MUDIS main screen - shows the two MUDs clustered ACEs*
+ 
+</p>
+</details>
+
+<details><summary><b>DISSIMILAR ACEs</b></summary>
+<p>
+<img src="/images/dissimilar .PNG" width="80%" height="450">
+
+*MUDIS main screen - shows the two MUDs dissimilar ACEs*
+ 
+</p>
+</details>
