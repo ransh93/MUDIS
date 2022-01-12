@@ -127,3 +127,19 @@ MUDIS also presents two features that help us the reaerchers to automatre our wo
 | <img src="/images/homepage.PNG" width="80%" height="450"> | 
 |:--:| 
 | *MUDIS main screen - gives users the ability to choose two MUDs and to compare, generalize and filter ACEs using the system* |
+
+| <img src="/images/similarity_score_and_identical.PNG" width="80%" height="450"> | 
+|:--:| 
+| *MUDIS compare screen - shows the two MUDs similarity score and the identical ACEs between them* |
+
+| <img src="/images/domain_based_similarity.PNG" width="80%" height="450"> | 
+|:--:| 
+| *MUDIS compare screen - shows the two MUDs domain based similarity ACEs* |
+
+| <img src="/images/clustered.PNG" width="80%" height="450"> | 
+|:--:| 
+| *MUDIS main screen - shows the two MUDs clustered ACEs* |
+
+| <img src="/images/dissimilar.PNG" width="80%" height="450"> | 
+|:--:| 
+| *MUDIS main screen - shows the two MUDs dissimilar ACEs* |
