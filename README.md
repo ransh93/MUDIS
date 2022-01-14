@@ -8,6 +8,19 @@ This tool and all algorithems within are explained and developed to promote the 
 
 Add the paper here!
 
+## Citation
+
+If you find this tool useful in your research, please consider citing our papers:
+
+```
+@inproceedings{bremler2021poster,
+  title={Poster: IoT Location Impact on Network Behavior and MUD},
+  author={Bremler-Barr, Anat and Meyuhas, Bar and Shister, Ran},
+  year={2021},
+  booktitle={IMC Conference},
+  publisher = {ACM}
+}
+```
 
 ## Installation guide ##
 
@@ -117,8 +130,6 @@ MUDIS also presents two features that help us the reaerchers to automatre our wo
   
 </p>
 </details>
-
-
 
 
 ## Screens examples ##
