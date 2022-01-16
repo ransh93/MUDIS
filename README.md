@@ -168,6 +168,14 @@ We really encourage you to install it and try it by yourself.
 </p>
 </details>
 
+<details><summary><b>DISSIMILAR ACEs</b></summary>
+<p>
+<img src="/images/dissimilar .PNG" width="80%" height="450">
+
+*MUDIS main screen - shows the two MUDs dissimilar ACEs*
+ 
+</p>
+</details>
 
 ## Citation
 
@@ -182,12 +190,3 @@ If you find this tool useful in your research, please consider citing our papers
   publisher = {ACM}
 }
 ```
-
-<details><summary><b>DISSIMILAR ACEs</b></summary>
-<p>
-<img src="/images/dissimilar .PNG" width="80%" height="450">
-
-*MUDIS main screen - shows the two MUDs dissimilar ACEs*
- 
-</p>
-</details>
