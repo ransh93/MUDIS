@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Add a new MUD file</title>
+
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!-- Main CSS-->
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="../static/css/main.css" rel="stylesheet" media="all">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+
+        .page-wrapper {
+          background-color: #d9edf7;
+        }
+
+        .card-6 {
+            background: transparent;
+            border: transparent;
+        }
+
+        .input-group {
+            position: relative;
+            margin: 0;
+            padding: 0px 40px;
+        }
+
+        .card-6 .card-body {
+            background: #fff;
+            position: relative;
+            border: 1px solid #e5e5e5;
+            border-bottom: none;
+            padding: 30px 0;
+            padding-bottom: 0;
+            -webkit-border-top-left-radius: 3px;
+            -moz-border-radius-topleft: 3px;
+            border-top-left-radius: 3px;
+            -webkit-border-top-right-radius: 3px;
+            -moz-border-radius-topright: 3px;
+            border-top-right-radius: 3px;
+        }
+
+        .form-row {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: nowrap;
+            -webkit-box-align: start;
+            -webkit-align-items: flex-start;
+            -moz-box-align: start;
+            -ms-flex-align: start;
+            align-items: flex-start;
+            padding: 24px 55px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .form-row .name {
+            width: 188px;
+            color: #333;
+            font-size: 15px;
+            font-weight: 700;
+            margin-top: 11px;
+        }
+
+        .select--style-6 {
+            width: 168px;
+            height: 38px;
+            background: transparent;
+            border: 1px solid #cccccc;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            color: #666;
+            font-size: 15px;
+            -webkit-transition: all 0.4s ease;
+            -o-transition: all 0.4s ease;
+            -moz-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+            padding: 0 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">MUDIS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link " href="/mudscoordinator">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link active" href="/addmud">Add a MUD</a>
+    </div>
+  </div>
+</nav>
+
+<form action = "http://localhost:5000/uploadMud" method = "POST" enctype = "multipart/form-data">
+    <div class="page-wrapper p-t-100 p-b-50">
+        <div class="wrapper wrapper--w900">
+            <div class="card card-6">
+                <div class="card-heading">
+                    <h2 class="title">Add a new MUD file</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        <div class="form-row">
+                            <div class="name">MUD file name</div>
+                            <div class="value">
+                                <input class="input--style-6" type="text" name="mud_name">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">The device type</div>
+                                <div class="input-group">
+                                    <select name="device_type" id="device_type" class="select--style-6" >
+                                        <option value="plug">Plug</option>
+                                        <option value="bulb">Bulb</option>
+                                        <option value="camera">Camera</option>
+                                        <option value="cleaner">Cleaner</option>
+                                        <option value="tv">TV</option>
+                                        <option value="hub">Hub</option>
+                                        <option value="doorbell">Doorbell</option>
+                                        <option value="kitchen">Kitchen device</option>
+                                        <option value="thermostat">Thermostat</option>
+
+                                    </select>
+                                </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Device name</div>
+                            <div class="value">
+                                <input class="input--style-6" type="text" name="device_name">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">The device location</div>
+                                <div class="input-group">
+                                    <select name="dev_location" id="dev_location" class="select--style-6" >
+                                        <option value="us">United states</option>
+                                        <option value="gb">United kingdom</option>
+                                        <option value="hk">Hong kong</option>
+                                        <option value="cn">China</option>
+                                        <option value="il">Israel</option>
+                                        <option value="ar">Argentina</option>
+                                        <option value="es">Spain</option>
+                                        <option value="ru">Russia</option>
+                                        <option value="au">Australia</option>
+                                        <option value="aq">Antartica</option>
+                                        <option value="in">India</option>
+                                        <option value="br">Brazil</option>
+                                        <option value="mx">Mexico</option>
+                                        <option value="de">Germany</option>
+                                        <option value="fr">France</option>
+                                        <option value="generalization">Generalization</option>
+                                    </select>
+                                </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Mud creator</div>
+                            <div class="radio">
+                                <input type="radio" id="mudgee" name="creator" value="mudgee">
+                                <label for="mudgee">Mudgee</label><br>
+                                <input type="radio" id="mudpd" name="creator" value="mudpd">
+                                <label for="mudpd">MUD-PD</label><br>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Upload MUD</div>
+                            <div class="value">
+                                <div class="input-group js-input-file">
+                                    <input class="input-file" type="file" name="mud_file" id="file">
+                                    <label class="label--file" for="file">Choose file</label>
+                                    <span class="input-file__info">No file chosen</span>
+                                </div>
+                                <div class="label--desc">Upload your selected MUD into our system</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn--radius-2 btn--blue-2" type="submit">Send MUD</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+    <!-- Jquery JS-->
+    <script src="../static/js/jquery/jquery.min.js"></script>
+
+
+    <!-- Main JS-->
+    <script src="../static/js/global.js"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->

@@ -1,0 +1,113 @@
+
+<html lang="en">
+  <head>
+    <title>Vis Network | Example Applications | Disassembler</title>
+    <style type="text/css">
+      #mynetwork {
+        width: 900px;
+        height: 850px;
+        border: 1px solid lightgray;
+        display: block;
+      }
+    </style>
+    <script src="https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js"></script>
+  </head>
+  <body>
+    <p>
+      Use VisJS to diagram the Control-Flow-Graph (CFG) of a function from a
+      program you wish to analyze.
+    </p>
+    <div id="mynetwork"></div>
+    <br />
+    <script type="text/javascript">
+
+const options = {
+  manipulation: false,
+  height: "90%",
+  layout: {
+    hierarchical: {
+      enabled: true,
+      levelSeparation: 300,
+    },
+  },
+  physics: {
+    hierarchicalRepulsion: {
+      nodeDistance: 300,
+    },
+  },
+};
+    const nodes = [
+  {
+    id: "1",
+    size: 150,
+    label:
+      "0x00405a2e:\nmov    DWORD PTR ss:[esp + 0x000000b0], 0x00000002n",
+    color: "#FFCFCF",
+    shape: "box",
+    font: { face: "monospace", align: "left" },
+  },
+
+  {
+    id: "2",
+    size: 150,
+    label:
+      "asdasd\n asdasdasda",
+    color: "#FFCFCF",
+    shape: "box",
+    font: { face: "monospace", align: "left" },
+  },
+    {
+    id: "3",
+    size: 150,
+    label:
+      "0x00405a2e:\nmov    DWORD PTR ss:[esp + 0x000000b0], 0x00000002n",
+    color: "#FFCFCF",
+    shape: "box",
+    font: { face: "monospace", align: "left" },
+  },
+
+  {
+    id: "4",
+    size: 150,
+    label:
+      "asdasd\n asdasdasda",
+    color: "#FFCFCF",
+    shape: "box",
+    font: { face: "monospace", align: "left" },
+  }
+
+  ]
+
+  const edges = [
+  {
+    from: "1",
+    to: "2",
+    physics: false,
+    label: "asdasda",
+    smooth: { type: "cubicBezier" },
+  },
+  {
+    from: "3",
+    to: "4",
+    arrows: "to",
+    physics: false,
+    label: "asdasda",
+    smooth: { type: "cubicBezier" },
+  }
+
+  ]
+
+  console.log(nodes)
+  console.log(edges)
+  
+      var container = document.getElementById("mynetwork");
+      var data = { nodes: nodes, edges: edges };
+      var gph = new vis.Network(container, data, options);
+
+    </script>
+  </body>
+</html>
+
+
+
+

@@ -1,0 +1,5 @@
+flask
+jellyfish
+pymongo==3.11.3
+muddy==2019.7.25.post2
+Werkzeug==0.16.0

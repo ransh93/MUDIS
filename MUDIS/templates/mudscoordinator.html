@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@5.12.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.1.0/themes/reset-min.css">
+  <link rel="stylesheet" href="https://unpkg.com/hover.css@2.3.2/css/hover.css">
+
+  <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/export/bootstrap-table-export.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+  <!-- added in order for the new buttons to work -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+  <style type='text/css'>
+    body {
+      background-color: #d9edf7;
+    }
+
+    .select,
+      #locale {
+        width: 100%;
+      }
+      .like {
+        margin-right: 10px;
+      }
+
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0);
+      transition: opacity 500ms;
+      visibility: hidden;
+      opacity: 5;
+    }
+    .overlay:target {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .popup {
+      margin: 300px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 5px;
+      width: 30%;
+      position: relative;
+      transition: all 5s ease-in-out;
+    }
+
+    .popup h2 {
+      margin-top: 0;
+      color: #333;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+    .popup .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      transition: all 200ms;
+      font-size: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #333;
+    }
+    .popup .close:hover {
+      color: #06D85F;
+    }
+    .popup .content {
+      max-height: 30%;
+      overflow: auto;
+    }
+
+    @media screen and (max-width: 700px){
+      .box{
+        width: 70%;
+      }
+      .popup{
+        width: 70%;
+      }
+    }
+
+  </style>
+
+
+
+
+  <script type='text/javascript'>
+    $(window).load(function(){
+      var data = {{data|tojson}};
+      var columns = {{columns|tojson}};
+
+      var dns = 0;
+      var ntp = 0;
+      var p2p = 0;
+      var inner_ip = 0;
+
+      $(function() {
+        $('#table').bootstrapTable({
+          data: data,
+          columns: columns,
+        });
+
+
+       $('#table').on('check.bs.table uncheck.bs.table ' +
+      'check-all.bs.table uncheck-all.bs.table',
+    function () {
+      $compare.prop('disabled', $('#table').bootstrapTable('getSelections').length < 2)
+
+      // save your data, here just save the current page
+      selections = getIdSelections()
+
+      // push or splice the selections if you want to save all data selections
+    })
+    $('#table').on('all.bs.table', function (e, name, args) {
+      console.log(name, args)
+    })
+
+              $('#compare').click(function () {
+
+                  alert("send to comapre")
+
+    var ids = getIdSelections()
+    var locations = getMudsLocationSelections()
+    var files_path = getMudsPathsSelections()
+    var devices_type = getDeviceTypeSelections()
+    var devices_name = getDeviceNameSelections()
+
+    post('/compare', { first_mud_path: files_path[0], second_mud_path: files_path[1], first_mud_name: ids[0], second_mud_name: ids[1],
+    first_mud_location: locations[0], second_mud_location: locations[1], device_type: devices_type[0], device_name: devices_name[0],
+    dns_filter: dns, ntp_filter: ntp, p2p_filter: p2p, inner_ip_filter: inner_ip})
+
+     /*
+     $('#table').bootstrapTable('remove', {
+        field: 'mud_name',
+        values: ids
+      })
+      $remove.prop('disabled', true)
+      */
+    })
+
+      });
+
+    $('#dns').click(function () {
+        dns = (dns == 0) ? 1 : (dns == 1) ? 0 : "";
+    })
+
+     $('#ntp').click(function () {
+        ntp = (ntp == 0) ? 1 : (ntp == 1) ? 0 : "";
+    })
+
+     $('#p2p').click(function () {
+         p2p = (p2p == 0) ? 1 : (p2p == 1) ? 0 : "";
+    })
+
+     $('#inner_ip').click(function () {
+        inner_ip = (inner_ip == 0) ? 1 : (inner_ip == 1) ? 0 : "";
+    })
+
+    });
+
+
+    // Post to the provided URL with the specified parameters.
+    function post(path, parameters) {
+        var form = $('<form></form>');
+
+        form.attr("method", "post");
+        form.attr("action", path);
+
+        $.each(parameters, function(key, value) {
+            var field = $('<input></input>');
+
+            field.attr("type", "hidden");
+            field.attr("name", key);
+            field.attr("value", value);
+
+            form.append(field);
+        });
+
+        // The form needs to be a part of the document in
+        // order for us to be able to submit it.
+        $(document.body).append(form);
+        form.submit();
+    }
+
+  </script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">MUDIS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/mudscoordinator">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link " href="/addmud">Add a MUD</a>
+    </div>
+  </div>
+</nav>
+
+<div id="toolbar">
+  <button id="compare" class="btn btn-success" disabled>
+    <i class="fa fa-binoculars"></i> Compare
+  </button>
+  <button id="dns" type="button" class="btn btn-outline-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+    DNS filter
+  </button>
+  <button id="ntp" type="button" class="btn btn-outline-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+    NTP filter
+  </button>
+  <button id="p2p" type="button" class="btn btn-outline-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+    P2P filter
+  </button>
+  <button id="inner_ip" type="button" class="btn btn-outline-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+    INNER IP filter
+  </button>
+</div>
+  <div class="container" style="padding: 10px; ">
+    <h1>{{title}}</h1>
+    <br/>
+    <div id="toolbar"></div>
+    <table
+      id="table"
+      data-toolbar="#toolbar"
+      data-search="true"
+      data-show-refresh="true"
+      data-show-toggle="true"
+      data-show-fullscreen="true"
+      data-show-columns="true"
+      data-show-columns-toggle-all="true"
+      data-detail-view="true"
+      data-show-export="true"
+      data-click-to-select="true"
+      data-detail-formatter="detailFormatter"
+      data-minimum-count-columns="2"
+      data-show-pagination-switch="true"
+      data-pagination="true"
+      data-id-field="mud_name"
+      data-page-list="[10, 25, 50, 100, all]"
+      data-response-handler="responseHandler">
+    </table>
+  </div>
+
+<script>
+  var $table = $('#table')
+  var $compare = $('#compare')
+  var $dns = $('#dns')
+  var $ntp = $('#ntp')
+  var $p2p = $('#p2p')
+  var $inner_ip = $('#inner_ip')
+  var selections = []
+
+  function getIdSelections() {
+    return $.map($('#table').bootstrapTable('getSelections'), function (row) {
+      return row.mud_name
+    })
+  }
+
+  function getDeviceTypeSelections() {
+    return $.map($('#table').bootstrapTable('getSelections'), function (row) {
+      return row.device_type
+    })
+  }
+
+  function getDeviceNameSelections() {
+    return $.map($('#table').bootstrapTable('getSelections'), function (row) {
+      return row.device_name
+    })
+  }
+
+  function getMudsPathsSelections() {
+    return $.map($('#table').bootstrapTable('getSelections'), function (row) {
+      return row.mud_file_path
+    })
+  }
+
+  function getMudsLocationSelections() {
+    return $.map($('#table').bootstrapTable('getSelections'), function (row) {
+      return row.dev_location
+    })
+  }
+
+  function responseHandler(res) {
+    console.log(res)
+    $.each(res.rows, function (i, row) {
+      row.state = $.inArray(row.id, selections) !== -1
+    })
+    return res
+  }
+
+
+    function detailFormatter(index, row) {
+
+      var html = []
+       $.each(row, function (key, value) {
+         html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+         })
+      return html.join('')
+    }
+
+
+  function operateFormatter(value, row, index) {
+    return [
+      '<a class="present" href="javascript:void(0)" title="Show MUD">',
+      '<i class="fa fa-eye"></i>',
+      '</a>  ',
+      '<a class="remove" href="javascript:void(0)" title="Remove">',
+      '<i class="fa fa-trash"></i>',
+      '</a>'
+    ].join('')
+  }
+
+  function countryFormatter(value, row, index) {
+      let country_code = row.dev_location
+
+      return [
+          `<img src="../static/flags/${country_code}_32.png" alt="${country_code}">`
+      ].join('')
+  }
+
+    window.operateEvents = {
+    'click .present': function (e, value, row, index) {
+        // Assign handlers immediately after making the request,
+        // and remember the jqxhr object for this request
+        var jqxhr = $.get( "/getMudContent", { mud_id: row._id }, function(data) {
+          alert( data );
+          var obj = JSON.parse(data);
+        Swal.fire({
+          title: '<strong>HTML <u>example</u></strong>',
+          icon: 'info',
+          html: obj,
+          showCloseButton: true,
+          showCancelButton: true,
+          focusConfirm: false,
+          confirmButtonText:
+            '<i class="fa fa-thumbs-up"></i> Great!',
+          confirmButtonAriaLabel: 'Thumbs up, great!',
+          cancelButtonText:
+            '<i class="fa fa-thumbs-down"></i>',
+          cancelButtonAriaLabel: 'Thumbs down'
+        })
+        })
+          .fail(function() {
+            alert( "error" );
+          })
+    },
+    'click .remove': function (e, value, row, index) {
+      $table.bootstrapTable('remove', {
+        field: '_id',
+        values: [row._id]
+      })
+    }
+  }
+
+  </script>
+
+
+</body>
+</html>

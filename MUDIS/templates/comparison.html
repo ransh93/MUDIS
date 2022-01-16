@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="../static/js/vis-network.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>{{ title }}</title>
+
+    <style type="text/css">
+        .boxed_center {
+          background-color: #f7f7f7;
+          width: 550px;
+          border: 2px solid black;
+          padding: 10px;
+          margin: 20px;
+          border-radius: 25px;
+          position: absolute;
+          top: 50%;
+          left: 25%;
+        }
+
+        h2,h4{
+            text-align: center;
+        }
+
+        .boxed_left {
+          background-color: #f7f7f7;
+          width: 500px;
+          border: 2px solid black;
+          padding: 10px;
+          margin: 20px;
+          border-radius: 25px;
+          position: absolute;
+          top: 50%;
+          left: 0%;
+          float: left;
+        }
+
+        .boxed_right {
+          background-color: #f7f7f7;
+          width: 500px;
+          border: 2px solid black;
+          padding: 10px;
+          margin: 20px;
+          border-radius: 25px;
+          position: absolute;
+          top: 50%;
+          left: 55%;
+          float: right;
+        }
+
+        .boxed {
+          background-color: #f7f7f7;
+          width: 550px;
+          border: 2px solid black;
+          padding: 10px;
+          margin: 20px;
+          border-radius: 25px;
+        }
+
+        #content {
+            position: relative;
+        }
+
+
+
+        .top_image {
+            position: absolute;
+            bottom: 45px;
+            right: 5px;
+        }
+
+        .bottom_image {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+        }
+
+        .center {
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        th, td {
+          padding: 15px;
+        }
+
+        body {
+          background-color: #d9edf7;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">MUDIS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link " href="/mudscoordinator">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link " href="/addmud">Add a MUD</a>
+    </div>
+  </div>
+</nav>
+
+<br>
+<h2>MUD Comparision Tool</h2>
+<br>
+    <h4>Similarity score: {{ compare_metrices[0] }}</h4>
+<br>
+
+<br>
+
+<div class="card border-success mx-auto" style="max-width: 80rem;">
+  <div class="card-header">
+      <h4>Identical Aces between both MUDs</h4>
+  </div>
+  <div class="card-body">
+    {% if identical_rules|length > 0 %}
+      {% for ace in identical_rules%}
+
+          <div class="boxed_center" id="content">
+            ace name = {{ ace.name }}, ace rule type = <b>{{ ace.rule_type }}</b>
+            <br><br>
+            &emsp; Matches:
+            <br>
+            {% for match in ace.matches%}
+                {% if match.match_type == "tcp" %}
+                    {% if match.rule_type == "from" %}
+                        &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>, direction initiated = {{ match.direction_initiated }}
+                        <br>
+                    {% elif match.rule_type == "to" %}
+                        &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                    {% endif %}
+                    <br>
+                {% endif %}
+
+                {% if match.match_type == "udp" %}
+                    &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                    <br>
+                {% endif %}
+
+                {% if match.match_type == "icmp" %}
+                    &emsp;&emsp; icmp type = <b>{{ match.icmp_type }}</b>, icmp code = <b>{{ match.icmp_code }}</b>
+                    <br>
+                {% endif %}
+
+                {% if match.match_type == "ipv4" %}
+                    {% if match.dns_name is defined %}
+                        &emsp;&emsp; protocol = {{ match.protocol }}, dns name = <b>{{ match.dns_name }}</b>
+                        <br>
+                    {% elif match.ipv4_network is defined %}
+                        &emsp;&emsp; protocol = {{ match.protocol }}, ipv4 network = <b>{{ match.ipv4_network }}</b>
+                        <br>
+                    {% elif match.protocol is defined %}
+                        &emsp;&emsp; protocol = {{ match.protocol }}
+                        <br>
+                    {% endif %}
+                {% endif %}
+
+                {% if match.match_type == "ietf-mud:mud" %}
+                        &emsp;&emsp; identifier = <b>{{ match.match_type }}</b>
+                    <br>
+                {% endif %}
+            {% endfor %}
+          <img class="top_image" src="../static/flags/{{ first_mud_location }}_32.png">
+          <img class="bottom_image" src="../static/flags/{{ second_mud_location }}_32.png">
+          </div>
+      {% endfor %}
+  {% else %}
+        <h3>There is nothing to show</h3>
+  {% endif %}
+  </div>
+</div>
+
+<br>
+
+<div class="card border-primary mx-auto" style="max-width: 80rem;">
+  <div class="card-header">
+      <h4>Domain based similarity Aces</h4>
+  </div>
+  <div class="card-body">
+  {% if domain_similar_rules|length > 0 %}
+      <table class="center" border="0">
+          {% for first_ace, second_ace in domain_similar_rules%}
+              <tr>
+              <td>
+                <div class="boxed" id="content">
+                ace name = {{ first_ace.name }}, ace rule type = <b>{{ first_ace.rule_type }}</b>
+                <br><br>
+                &emsp; Matches:
+                <br>
+                {% for match in first_ace.matches%}
+                    {% if match.match_type == "tcp" %}
+                        {% if match.rule_type == "from" %}
+                            &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>, direction initiated = {{ match.direction_initiated }}
+                            <br>
+                        {% elif match.rule_type == "to" %}
+                            &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                        {% endif %}
+                        <br>
+                    {% endif %}
+
+                    {% if match.match_type == "udp" %}
+                        &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                        <br>
+                    {% endif %}
+
+                    {% if match.match_type == "icmp" %}
+                        &emsp;&emsp; icmp type = <b>{{ match.icmp_type }}</b>, icmp code = <b>{{ match.icmp_code }}</b>
+                        <br>
+                    {% endif %}
+
+                    {% if match.match_type == "ipv4" %}
+                        {% if match.dns_name is defined %}
+                            &emsp;&emsp; protocol = {{ match.protocol }}, dns name = <b>{{ match.dns_name }}</b>
+                            <br>
+                        {% elif match.ipv4_network is defined %}
+                            &emsp;&emsp; protocol = {{ match.protocol }}, ipv4 network = <b>{{ match.ipv4_network }}</b>
+                            <br>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+               <img src="../static/flags/{{ first_mud_location }}_32.png">
+              </div>
+              </td>
+              <td>
+                  <div class="boxed" id="content">
+                    ace name = {{ second_ace.name }}, ace rule type = <b>{{ second_ace.rule_type }}</b>
+                    <br><br>
+                    &emsp; Matches:
+                    <br>
+                    {% for match in second_ace.matches%}
+                        {% if match.match_type == "tcp" %}
+                            {% if match.rule_type == "from" %}
+                                &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>, direction initiated = {{ match.direction_initiated }}
+                                <br>
+                            {% elif match.rule_type == "to" %}
+                                &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                            {% endif %}
+                            <br>
+                        {% endif %}
+
+                        {% if match.match_type == "udp" %}
+                            &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                            <br>
+                        {% endif %}
+
+                        {% if match.match_type == "icmp" %}
+                            &emsp;&emsp; icmp type = <b>{{ match.icmp_type }}</b>, icmp code = <b>{{ match.icmp_code }}</b>
+                            <br>
+                        {% endif %}
+
+                        {% if match.match_type == "ipv4" %}
+                            {% if match.dns_name is defined %}
+                                &emsp;&emsp; protocol = {{ match.protocol }}, dns name = <b>{{ match.dns_name }}</b>
+                                <br>
+                            {% elif match.ipv4_network is defined %}
+                                &emsp;&emsp; protocol = {{ match.protocol }}, ipv4 network = <b>{{ match.ipv4_network }}</b>
+                                <br>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    <img class="bottom_image" src="../static/flags/{{ second_mud_location }}_32.png">
+                  </div>
+              </td>
+              </tr>
+          {% endfor %}
+      </table>
+  {% else %}
+      <h3>There is nothing to show</h3>
+  {% endif %}
+  </div>
+</div>
+
+<br>
+
+<div class="card border-warning mx-auto" style="max-width: 80rem;">
+  <div class="card-header">
+      <h4>Clustered Aces</h4>
+  </div>
+  <div class="card-body">
+  {% if not_domain_similar_rules|length > 0 %}
+      <table class="center" border="0">
+          {% for first_ace, second_ace in not_domain_similar_rules%}
+              <tr>
+              <td>
+                <div class="boxed" id="content">
+                ace name = {{ first_ace.name }}, ace rule type = <b>{{ first_ace.rule_type }}</b>
+                <br><br>
+                &emsp; Matches:
+                <br>
+                {% for match in first_ace.matches%}
+                    {% if match.match_type == "tcp" %}
+                        {% if match.rule_type == "from" %}
+                            &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>, direction initiated = {{ match.direction_initiated }}
+                            <br>
+                        {% elif match.rule_type == "to" %}
+                            &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                        {% endif %}
+                        <br>
+                    {% endif %}
+
+                    {% if match.match_type == "udp" %}
+                        &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                        <br>
+                    {% endif %}
+
+                    {% if match.match_type == "icmp" %}
+                        &emsp;&emsp; icmp type = <b>{{ match.icmp_type }}</b>, icmp code = <b>{{ match.icmp_code }}</b>
+                        <br>
+                    {% endif %}
+
+                    {% if match.match_type == "ipv4" %}
+                        {% if match.dns_name is defined %}
+                            &emsp;&emsp; protocol = {{ match.protocol }}, dns name = <b>{{ match.dns_name }}</b>
+                            <br>
+                        {% elif match.ipv4_network is defined %}
+                            &emsp;&emsp; protocol = {{ match.protocol }}, ipv4 network = <b>{{ match.ipv4_network }}</b>
+                            <br>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+               <img src="../static/flags/{{ first_mud_location }}_32.png">
+              </div>
+              </td>
+              <td>
+                  <div class="boxed" id="content">
+                    ace name = {{ second_ace.name }}, ace rule type = <b>{{ second_ace.rule_type }}</b>
+                    <br><br>
+                    &emsp; Matches:
+                    <br>
+                    {% for match in second_ace.matches%}
+                        {% if match.match_type == "tcp" %}
+                            {% if match.rule_type == "from" %}
+                                &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>, direction initiated = {{ match.direction_initiated }}
+                                <br>
+                            {% elif match.rule_type == "to" %}
+                                &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                            {% endif %}
+                            <br>
+                        {% endif %}
+
+                        {% if match.match_type == "udp" %}
+                            &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                            <br>
+                        {% endif %}
+
+                        {% if match.match_type == "icmp" %}
+                            &emsp;&emsp; icmp type = <b>{{ match.icmp_type }}</b>, icmp code = <b>{{ match.icmp_code }}</b>
+                            <br>
+                        {% endif %}
+
+                        {% if match.match_type == "ipv4" %}
+                            {% if match.dns_name is defined %}
+                                &emsp;&emsp; protocol = {{ match.protocol }}, dns name = <b>{{ match.dns_name }}</b>
+                                <br>
+                            {% elif match.ipv4_network is defined %}
+                                &emsp;&emsp; protocol = {{ match.protocol }}, ipv4 network = <b>{{ match.ipv4_network }}</b>
+                                <br>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    <img src="../static/flags/{{ second_mud_location }}_32.png">
+                  </div>
+              </td>
+              </tr>
+          {% endfor %}
+      </table>
+  {% else %}
+      <h3>There is nothing to show</h3>
+  {% endif %}
+  </div>
+</div>
+
+
+<br>
+
+
+<div class="card border-danger mx-auto" style="max-width: 80rem;">
+  <div class="card-header">
+      <h4>Dissimilar Aces</h4>
+  </div>
+  <div class="card-body">
+    {% if non_similar_rules_for_presentation[0]|length > 0 or non_similar_rules_for_presentation[1]|length > 0 %}
+        <table class="center" border="0">
+        <tr>
+        <td>
+      {% for ace in non_similar_rules_for_presentation[0]%}
+          <div class="boxed" id="content">
+            ace name = {{ ace.name }}, ace rule type = <b>{{ ace.rule_type }}</b>
+            <br><br>
+            &emsp; Matches:
+            <br>
+            {% for match in ace.matches%}
+                {% if match.match_type == "tcp" %}
+                    {% if match.rule_type == "from" %}
+                        &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>, direction initiated = {{ match.direction_initiated }}
+                        <br>
+                    {% elif match.rule_type == "to" %}
+                        &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                    {% endif %}
+                        <br>
+                    {% endif %}
+
+                    {% if match.match_type == "udp" %}
+                        &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                        <br>
+                    {% endif %}
+
+                    {% if match.match_type == "icmp" %}
+                        &emsp;&emsp; icmp type = <b>{{ match.icmp_type }}</b>, icmp code = <b>{{ match.icmp_code }}</b>
+                        <br>
+                    {% endif %}
+
+                    {% if match.match_type == "ipv4" %}
+                        {% if match.dns_name is defined %}
+                            &emsp;&emsp; protocol = {{ match.protocol }}, dns name = <b>{{ match.dns_name }}</b>
+                            <br>
+                        {% elif match.ipv4_network is defined %}
+                            &emsp;&emsp; protocol = {{ match.protocol }}, ipv4 network = <b>{{ match.ipv4_network }}</b>
+                            <br>
+                        {% elif match.protocol is defined %}
+                            &emsp;&emsp; protocol = {{ match.protocol }}
+                            <br>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if match.match_type == "ietf-mud:mud" %}
+                            &emsp;&emsp; identifier = <b>{{ match.match_type }}</b>
+                        <br>
+                {% endif %}
+            {% endfor %}
+           <img src="../static/flags/{{ first_mud_location }}_32.png">
+          </div>
+      {% endfor %}
+        </td>
+        <td>
+      {% for ace in non_similar_rules_for_presentation[1]%}
+          <div class="boxed" id="content">
+            ace name = {{ ace.name }}, ace rule type = <b>{{ ace.rule_type }}</b>
+            <br><br>
+            &emsp; Matches:
+            <br>
+            {% for match in ace.matches%}
+                {% if match.match_type == "tcp" %}
+                    {% if match.rule_type == "from" %}
+                        &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>, direction initiated = {{ match.direction_initiated }}
+                        <br>
+                    {% elif match.rule_type == "to" %}
+                        &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                    {% endif %}
+                        <br>
+                    {% endif %}
+
+                    {% if match.match_type == "udp" %}
+                        &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                        <br>
+                    {% endif %}
+
+                    {% if match.match_type == "icmp" %}
+                        &emsp;&emsp; icmp type = <b>{{ match.icmp_type }}</b>, icmp code = <b>{{ match.icmp_code }}</b>
+                        <br>
+                    {% endif %}
+
+                    {% if match.match_type == "ipv4" %}
+                        {% if match.dns_name is defined %}
+                            &emsp;&emsp; protocol = {{ match.protocol }}, dns name = <b>{{ match.dns_name }}</b>
+                            <br>
+                        {% elif match.ipv4_network is defined %}
+                            &emsp;&emsp; protocol = {{ match.protocol }}, ipv4 network = <b>{{ match.ipv4_network }}</b>
+                            <br>
+                        {% elif match.protocol is defined %}
+                            &emsp;&emsp; protocol = {{ match.protocol }}
+                            <br>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if match.match_type == "ietf-mud:mud" %}
+                            &emsp;&emsp; identifier = <b>{{ match.match_type }}</b>
+                        <br>
+                {% endif %}
+            {% endfor %}
+           <img class="bottom_image" src="../static/flags/{{ second_mud_location }}_32.png">
+          </div>
+      {% endfor %}
+        </td>
+        </tr>
+        </table>
+  {% else %}
+        <h3>There is nothing to show</h3>
+  {% endif %}
+  </div>
+</div>
+<br>
+
+
+
+<div id="accordion">
+  <div class="card mx-auto" style="max-width: 80rem;">
+    <div class="card-header" id="headingOne">
+      <h3 class="mb-0 text-center">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <h3>Show Generalized MUD</h3>
+        </button>
+      </h3>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <div class="card border-info mx-auto" style="max-width: 80rem;">
+  <div class="card-header">
+      <h4>Generalized MUD</h4>
+  </div>
+  <div class="card-body">
+            {% if generalized_mud_rules|length > 0 %}
+              {% for generalized_element in generalized_mud_rules%}
+
+                  <div class="boxed_center" id="content">
+                    ace name = {{ generalized_element[0].name }}, ace rule type = <b>{{ generalized_element[0].rule_type }}</b>
+                    <br><br>
+                    &emsp; Matches:
+                    <br>
+                    {% for match in generalized_element[0].matches%}
+                        {% if match.match_type == "tcp" %}
+                                {% if match.rule_type == "from" %}
+                                    &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>, direction initiated = {{ match.direction_initiated }}
+                                    <br>
+                                {% elif match.rule_type == "to" %}
+                                    &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                                {% endif %}
+                                    <br>
+                                {% endif %}
+
+                                {% if match.match_type == "udp" %}
+                                    &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                                    <br>
+                                {% endif %}
+
+                                {% if match.match_type == "icmp" %}
+                                    &emsp;&emsp; icmp type = <b>{{ match.icmp_type }}</b>, icmp code = <b>{{ match.icmp_code }}</b>
+                                    <br>
+                                {% endif %}
+
+                                {% if match.match_type == "ipv4" %}
+                                    {% if match.dns_name is defined %}
+                                        &emsp;&emsp; protocol = {{ match.protocol }}, dns name = <b>{{ match.dns_name }}</b>
+                                        <br>
+                                    {% elif match.ipv4_network is defined %}
+                                        &emsp;&emsp; protocol = {{ match.protocol }}, ipv4 network = <b>{{ match.ipv4_network }}</b>
+                                        <br>
+                                    {% elif match.protocol is defined %}
+                                        &emsp;&emsp; protocol = {{ match.protocol }}
+                                        <br>
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if match.match_type == "ietf-mud:mud" %}
+                                        &emsp;&emsp; identifier = <b>{{ match.match_type }}</b>
+                                    <br>
+                                {% endif %}
+                    {% endfor %}
+                   <img class="top_image" src="../static/flags/{{ first_mud_location }}_32.png">
+                  <img class="bottom_image" src="../static/flags/{{ second_mud_location }}_32.png">
+                  </div>
+              {% endfor %}
+          {% else %}
+                <h3>There is nothing to show</h3>
+          {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
