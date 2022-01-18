@@ -128,7 +128,7 @@ We really encourage you to install it and try it by yourself.
 <p>
 <img src="images/addMUD.PNG" width="80%" height="450">
 
-*Add a new MUD screen - gives users the ability to add new generated MUDs into the system for further investigation*
+<em>Add a new MUD screen - gives users the ability to add new generated MUDs into the system for further investigation</em>
  
 </p>
 </details>
