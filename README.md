@@ -41,7 +41,7 @@ $ cd MUDIS
 
 So, the result of your MUDIS project folder should look like this:
 
-<img src="images/dirlist.png" width="50%" height="300">
+<img src="images/dirlist.png" width="50%" height="50%" style="object-fit:scale-down;">
 
 ### Step 2: Build and run your app with Compose
 - From your project directory, start up your application by running `docker-compose up`
