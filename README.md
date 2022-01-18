@@ -84,10 +84,10 @@ This objects above creates a MUD object that MUDIS will use in the more complex 
 Once you done uploading two or more MUDs you can start using one of the main feature of MUDIS, the comparison feature.<br>
 This feature is using the MUD object that was created using the MUDIS parsing engine (explained in the previous section) to find the followin things:
 <ul>  
-  <li><b>Identical ACEs</b> - these are ACEs that exsists in both MUDs compared together.
-  <li><b>Domain based similarity ACEs</b> - these are ACEs from both MUDs that has similar domains (More about similarity in our paper) with the ame port and protocol.
-  <li><b>Clustered ACEs</b> - This ACEs are being paired based on their port+protocol similarity or by their IPs similarity of by domains similarity with a different port.
-  <li><b>Dissimilar ACEs</b> - ACEs that has now given similarity with ACEs on the other MUD that we compared to.
+  <li><b>Identical ACEs</b> - these are ACEs that exsists in both MUDs compared together.</li>
+  <li><b>Domain based similarity ACEs</b> - these are ACEs from both MUDs that has similar domains (More about similarity in our paper) with the ame port and protocol.</li>
+  <li><b>Clustered ACEs</b> - This ACEs are being paired based on their port+protocol similarity or by their IPs similarity of by domains similarity with a different port</li>
+  <li><b>Dissimilar ACEs</b> - ACEs that has now given similarity with ACEs on the other MUD that we compared to.</li>
 </ul>
 In addition, the comparison results in a similarity score that the researcher can use to asstimaate how identical are the two MUDs.<br>
 This is an importent metric that we used during our research (moreover inside our paper)
