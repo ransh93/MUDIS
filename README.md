@@ -14,7 +14,7 @@ Add the paper here!
 
 MUDIS is a web application tool based on a **Flask server** (python code) and **MongoDB** (saves MUDS for your future use). <br>
 Inorder to help researchers out there I have created a detailed setup and installation guide that can be find here. <br>
-This guide will show you how to setup MUDIS in a quick and easy way by using **Docker compose** that will “setu&install” your entire environment in a few simple steps.<br>
+This guide will show you how to setup MUDIS in a quick and easy way by using **Docker compose** that will “setup&install” your entire environment in a few simple steps.<br>
 All the needed files are in this repository under MUDIS setup folder for our users use!
 
 ### Prerequisite
