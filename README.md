@@ -135,7 +135,7 @@ We really encourage you to install it and try it by yourself.
 
 <details><summary><b>HOME PAGE SCREEN</b></summary>
 <p>
-<img src="images/homepage.PNG" width="80%" height="450">
+<img src="images/homepage.PNG" width="80%" height="450" style="object-fit:scale-down;">
 <br>
 <em>MUDIS main screen - gives users the ability to choose two MUDs and to compare, generalize and filter ACEs using the system</em>
  
@@ -171,7 +171,7 @@ We really encourage you to install it and try it by yourself.
 
 <details><summary><b>DISSIMILAR ACEs</b></summary>
 <p>
-<img src="images/dissimilar .PNG" width="80%" height="450">
+<img src="images/dissimilar .PNG" width="80%" height="450" style="object-fit:scale-down;">
 <br>
 <em>MUDIS main screen - shows the two MUDs dissimilar ACEs</em>
  
