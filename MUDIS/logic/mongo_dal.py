@@ -3,8 +3,7 @@ from pymongo import MongoClient
 
 class MongoDal(object):
     def __init__(self, db_name, collection_name):
-        mongoclient = MongoClient('localhost', 27017)
-        # mongoclient = MongoClient('mongodb://localhost:27017')
+        mongoclient = MongoClient('muds_mongodb', 27017, username='root', password='rootpassword')
 
         database = mongoclient[db_name]
         self._collection = database[collection_name]
