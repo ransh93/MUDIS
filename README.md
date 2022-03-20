@@ -11,6 +11,10 @@ Add the paper here!
 This reserach was done as part of the <strong>DEEPNESS Lab</strong>
 <br>Come and visit us! https://deepness-lab.org/
 
+<img src="images/RGB_Efi_Arazi_School_Of_Computer_Science_EN (2).jpg" width="40%" height="40%" style="object-fit:scale-down;">
+<img src="images/deepness_lab.PNG" width="40%" height="40%" style="object-fit:scale-down;">
+
+
 ## Installation guide ##
 
 ### Overview
