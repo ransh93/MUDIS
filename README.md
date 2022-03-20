@@ -92,7 +92,7 @@ Once you done uploading two or more MUDs you can start using one of the main fea
 This feature is using the MUD object that was created using the MUDIS parsing engine (explained in the previous section) to find the followin things:
 <ul>  
   <li><b>Identical ACEs</b> - these are ACEs that exsists in both MUDs compared together.</li>
-  <li><b>Domain based similarity ACEs</b> - these are ACEs from both MUDs that has similar domains (More about similarity in our paper) with the ame port and protocol.</li>
+  <li><b>Similar ACEs</b> - these are ACEs from both MUDs that has similar domains (More about similarity in our paper) with the ame port and protocol.</li>
   <li><b>Clustered ACEs</b> - This ACEs are being paired based on their port+protocol similarity or by their IPs similarity of by domains similarity with a different port</li>
   <li><b>Dissimilar ACEs</b> - ACEs that has now given similarity with ACEs on the other MUD that we compared to.</li>
 </ul>
@@ -133,7 +133,7 @@ We really encourage you to install it and try it by yourself.
 
 <details><summary><b>ADD MUD SCREEN</b></summary>
 <p>
-<img src="images/addMUD.PNG" width="80%" height="450">
+<img src="images/addMUD.PNG" width="60%" height="60%" style="object-fit:scale-down;">
 <br>
 <em>Add a new MUD screen - gives users the ability to add new generated MUDs into the system for further investigation</em>
  
@@ -142,7 +142,7 @@ We really encourage you to install it and try it by yourself.
 
 <details><summary><b>HOME PAGE SCREEN</b></summary>
 <p>
-<img src="images/homepage.PNG" width="80%" height="450" style="object-fit:scale-down;">
+<img src="images/homepage.PNG" width="90%" height="90%" style="object-fit:scale-down;">
 <br>
 <em>MUDIS main screen - gives users the ability to choose two MUDs and to compare, generalize and filter ACEs using the system</em>
  
@@ -151,7 +151,7 @@ We really encourage you to install it and try it by yourself.
 
 <details><summary><b>SIMILARITY SCORE AND IDENTICAL ACEs</b></summary>
 <p>
-<img src="images/similarity_score_and_identical.PNG" width="80%" height="450">
+<img src="images/similarity_score_and_identical.PNG" width="90%" height="90%" style="object-fit:scale-down;">
 <br>
 <em>MUDIS compare screen - shows the two MUDs similarity score and the identical ACEs between them</em>
  
@@ -160,7 +160,7 @@ We really encourage you to install it and try it by yourself.
 
 <details><summary><b>DOMAIN BASED SIMILARITY ACEs</b></summary>
 <p>
-<img src="images/domain_based_similarity.PNG" width="80%" height="450">
+<img src="images/domain_based_similarity.PNG" width="90%" height="90%" style="object-fit:scale-down;">
 <br>
 <em>MUDIS compare screen - shows the two MUDs domain based similarity ACEs</em>
  
@@ -169,7 +169,7 @@ We really encourage you to install it and try it by yourself.
 
 <details><summary><b>CLUSTERED ACEs</b></summary>
 <p>
-<img src="images/clustered.PNG" width="80%" height="450">
+<img src="images/clustered.PNG" width="90%" height="90%" style="object-fit:scale-down;">
 <br>
 <em>MUDIS main screen - shows the two MUDs clustered ACEs</em>
  
@@ -178,7 +178,7 @@ We really encourage you to install it and try it by yourself.
 
 <details><summary><b>DISSIMILAR ACEs</b></summary>
 <p>
-<img src="images/dissimilar .PNG" width="80%" height="50%">
+<img src="images/dissimilar .PNG" width="90%" height="90%" style="object-fit:scale-down;">
 <br>
 <em>MUDIS main screen - shows the two MUDs dissimilar ACEs</em>
  
