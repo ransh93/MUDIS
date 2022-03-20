@@ -8,6 +8,9 @@ This tool and all algorithems within are explained and developed to promote the 
 
 Add the paper here!
 
+This reserach was done as part of the <strong>DEEPNESS Lab</strong>
+Come and visit us! https://deepness-lab.org/
+
 ## Installation guide ##
 
 ### Overview
