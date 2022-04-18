@@ -190,11 +190,11 @@ We really encourage you to install it and try it by yourself.
 If you find this tool useful in your research, please consider citing our papers:
 
 ```
-@inproceedings{bremler2021poster,
-  title={Poster: IoT Location Impact on Network Behavior and MUD},
-  author={Bremler-Barr, Anat and Meyuhas, Bar and Shister, Ran},
-  year={2021},
-  booktitle={IMC Conference},
-  publisher = {ACM}
-}
+@INPROCEEDINGS{demo_paper,
+    AUTHOR="Ran Shister and Anat Bremler-Barr and Bar Meyuhas",
+    TITLE="MUDIS - MUD Inspection System",
+    BOOKTITLE="NOMS 2022 - demo paper",
+    YEAR="2022",
+    PUBLISHER = "NOMS"
+} 
 ```
